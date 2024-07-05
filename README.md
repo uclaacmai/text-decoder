@@ -1,5 +1,10 @@
 # text-decoder
 
+## Organization
+- If there are two files in a directory one ending in .py and one in .ipynb that denotes that there should be some modular functions in the .py file and .ipynb should be used for tests
+- Utils should have no code for the members to fill
+- Not sure what to do? Check the Issues tab on github
+
 ## Environment 
 
 To create your conda environment
