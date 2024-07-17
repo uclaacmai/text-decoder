@@ -7,13 +7,14 @@ class CSVdataset(Dataset):
         assert type(nrows) == int or nrows is None, "nrows must be an integer or None"
         self.df = read_csv(filepath, header = None, nrows = nrows)
         self._validate_init()
+        self.length = len(self.df)
 
     def _validate_init(self):
         assert (len(self.df.shape) == 1 or (len(self.df.shape) == 2 and 
         self.df.shape[1] == 1)), f"Each row of the dataframe should only contain one entry, found {self.df.shape[1]}"
 
     def __len__(self):
-        return len(self.df)
+        return self.length
 
     def __getitem__(self, idx):
         return self.df.iloc[idx, 0]
