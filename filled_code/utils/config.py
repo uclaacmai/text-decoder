@@ -13,5 +13,6 @@ class Config:
     n_heads: int = 12
     n_layers: int = 12
 
-cfg = Config()
-print(cfg)
+if __name__ == "__main__":
+  cfg = Config()
+  print(cfg)
