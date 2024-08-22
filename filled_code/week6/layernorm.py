@@ -21,10 +21,15 @@ class LayerNorm(nn.Module):
 
     def forward(self, residual: Float[Tensor, "batch posn d_model"]) -> Float[Tensor, "batch posn d_model"]:
         # Compute mean across the model dimension (the last dimension)
-        mean = t.mean(residual, dim=(-1), keepdim = True) 
+        residual_mean = residual.mean(dim=(-1), keepdim = True) 
         # Compute variance across the model dimension (the last dimension)
-        var = t.var(residual, dim=(-1), keepdim = True, unbiased = False)
+        residual_var = residual.var(dim=(-1), keepdim = True, unbiased = False)
+        
+        # Sidenote: a small epsilon value is added to the variance to prevent division by zero
+        residual_std = (residual_var + self.cfg.layer_norm_eps).sqrt()
 
         # Normalize the residual by taking the difference between the residual and the mean, and dividing by the square root of the variance, then multiply by the learned weight and add the learned bias
-        # An additional note is that a small epsilon value is added to the variance to prevent division by zero
-        return ( (residual - mean) / ((var + self.cfg.layer_norm_eps).sqrt()) ) * self.w + self.b
+        normalized_residual = (residual - residual_mean) / residual_std
+        
+        # Multiple by learned weights and add learned bias
+        return normalized_residual * self.w + self.b  
