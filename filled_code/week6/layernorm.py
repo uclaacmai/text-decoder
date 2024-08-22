@@ -5,7 +5,7 @@ from torch import Tensor
 from utils.config import Config
 
 '''
-Layer Normalization is a type of normalization that normalizes across the model dimension. Each token in the input sequence is normalized independently of the other tokens in the sequence. Remember that in the transformer, the batches of sequences form a 3D tensor of shape (batch_size, sequence_length, d_model) where each batch contains batch_size sequences of length sequence_length where each token in the sequence is a high-dimensional vector of dim d_model. The normalization is done across the d_model dimension.
+Layer Normalization is a type of normalization that normalizes across the model dimension. Each token in the input sequence is normalized independently of the other tokens in the sequence. Remember that in the transformer, the batches of sequences form a 3D tensor of shape (batch_size, sequence_length, d_model) where each batch contains batch_size sequences of length sequence_length where each token in the sequence is a high-dimensional vector of dim d_model.
 
 (This is in contrast to Batch Normalization, which normalizes the activations of a layer across the batch dimension.)
 
