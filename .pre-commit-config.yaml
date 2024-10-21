@@ -3,7 +3,7 @@ repos:
     rev: v0.4.4
     hooks:
       - id: ruff # linter
-        types_or: [python, pyi, jupyter]
+        types_or: [python, pyi]
         args: [--fix]
       - id: ruff-format # formatter
-        types_or: [python, pyi, jupyter]
+        types_or: [python, pyi]
